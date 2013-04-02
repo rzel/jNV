@@ -58,6 +58,7 @@ class JNVLauncher{
                                 layoutOrientation   : JList.VERTICAL,
                                 background          : Color.WHITE,
                                 model               : listModel,
+                                selectedIndex       : 0,
                                 valueChanged        : { lse ->
                                     def selectedNote = swing.foundNotes.selectedValue
                                     swing.noteContent.selectAll()
