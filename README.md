@@ -41,7 +41,9 @@ TODOs
 		- [FIXED] selected note's contents are shown in text area
 	- on change of text field (enter for now, autocomplete later):
 		- list has notes that match, focus is on list's first row
-		- that rows contents are shown
+		- that row's contents are shown
+		- [FIXED] if no matches, a new note is created with the search text as title and focus is on text area for input of note contents.
+	- [FIXED] selecting a row in the list should set that as the note title as well. 
 	- [FIXED] keyboard scrolling of list's rows should change the contents view instantly
 
 	- [FIXED] search results still displays wierd - text is centered and gray bkgnd shows thru
