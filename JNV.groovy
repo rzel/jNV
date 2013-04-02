@@ -19,6 +19,9 @@ class JNVLauncher{
 
     JNVLauncher(notes){
         NOTES = notes
+        NOTES.getNotes().each { k,v ->
+            listModel.addElement(k)
+        }
     }
 
     def createAndShowUI(){
@@ -151,6 +154,9 @@ class Notes{
         allNotes[title]
     }
     
+    // TODO: replace with iterator
+    def getNotes() { allNotes }
+
     def setNote(title, contents){
         allNotes[title] = contents
     }
