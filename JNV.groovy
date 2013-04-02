@@ -69,7 +69,7 @@ ui = swing.frame(title:'jNV', defaultCloseOperation:JFrame.DISPOSE_ON_CLOSE,
             preferredSize: [520,600]
             ) {
         vbox {
-                 textField( id: 'noteName',
+                textField(  id: 'noteName',
                             preferredSize: [500,20],
                             actionPerformed: { 
                                 def nName = swing.noteName.getText()
@@ -85,27 +85,28 @@ ui = swing.frame(title:'jNV', defaultCloseOperation:JFrame.DISPOSE_ON_CLOSE,
                                     }
                                 }
                             }
-                       )
-            list(   id: 'foundNotes',
-                    preferredSize: [500,150], 
-                    layoutOrientation: JList.VERTICAL,
-                    background: Color.WHITE,
-                    model: new DefaultListModel(),
-                    valueChanged: { lse ->
-                        def selectedNote = swing.foundNotes.selectedValue
-                        swing.noteContent.selectAll()
-                        swing.noteContent.replaceSelection(NOTES.getNote(selectedNote))
-                    }
-            )
-            scrollPane(
-                preferredSize:[500,400]    //, 
-                //horizontalScrollBarPolicy: JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED,
-                //verticalScrollBarPolicy: JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
-                ){
-                // removed size to make it scrollable. Eureka link: http://stackoverflow.com/a/9624094
-                textArea(id: 'noteContent')
-                //noteContent.addDocumentListener(new MyDocumentListener())
-            }
+                )
+                scrollPane(preferredSize: [500,150]){
+                    list(   id: 'foundNotes',
+                            layoutOrientation: JList.VERTICAL,
+                            background: Color.WHITE,
+                            model: new DefaultListModel(),
+                            valueChanged: { lse ->
+                                def selectedNote = swing.foundNotes.selectedValue
+                                swing.noteContent.selectAll()
+                                swing.noteContent.replaceSelection(NOTES.getNote(selectedNote))
+                            }
+                    )
+                }
+                scrollPane(
+                    preferredSize:[500,400]    //, 
+                    //horizontalScrollBarPolicy: JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED,
+                    //verticalScrollBarPolicy: JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
+                    ){
+                    // removed size to make it scrollable. Eureka link: http://stackoverflow.com/a/9624094
+                    textArea(id: 'noteContent')
+                    //noteContent.addDocumentListener(new MyDocumentListener())
+                }
         }
 }
 
