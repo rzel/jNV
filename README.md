@@ -33,15 +33,16 @@ TODOs
 
 - Functional
 	- keyboard accelerators for all ui controls. TBD: find out what NV has for the controls
+		- shift tab from note contents should switch to note list.
 	- on start, the following is true:
 		- [FIXED] focus is on note name textfield
 		- [FIXED] list has all notes, 
-			- first note is selected.
-		- selected note's contents are shown in text area
+			- [FIXED] first note is selected.
+		- [FIXED] selected note's contents are shown in text area
 	- on change of text field (enter for now, autocomplete later):
 		- list has notes that match, focus is on list's first row
 		- that rows contents are shown
-	- keyboard scrolling of list's rows should change the contents view instantly
+	- [FIXED] keyboard scrolling of list's rows should change the contents view instantly
 
 	- [FIXED] search results still displays wierd - text is centered and gray bkgnd shows thru
 	- [FIXED] cannot run as executable
@@ -50,4 +51,5 @@ TODOs
 	- [FIXED] sphagetti code; needs reorg within the groovy file and possibly move to multiple files
 	- change autosave logic to be time-based instead of event-based as it is currently.
 	- save on exit as well
+	- see if there's a more groovy way of doing setNoteContent()
 	- remove debug prints
