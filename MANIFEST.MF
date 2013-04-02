@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: 1.7.0_13 (Oracle Corporation)
+Main-class: JNVLauncher
+Class-Path: groovy-all-2.1.0.jar
