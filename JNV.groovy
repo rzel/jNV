@@ -135,14 +135,14 @@ class AutoSaver implements DocumentListener {
         //Plain text components do not fire these events
     }
     public synchronized saveIfRequired(e){
-        println "saveifeqd: $COUNT"
+        //println "saveifeqd: $COUNT"
         if(COUNT == SAVE_AT){
             def doc = swing.noteContent.document
             def text = doc.getText(doc.startPosition.offset, doc.length)
             notes.setNote(swing.noteName.text, text)
             notes.save();
             COUNT = 0
-            println "saved notecontent:$text"
+            //println "saved notecontent:$text"
         }
         COUNT++;
     }
@@ -163,7 +163,7 @@ class Notes{
     private FILENAME = "notes.json"
     
     Notes(saveLoc){
-        println "saved at: $saveLoc"
+        //println "saved at: $saveLoc"
         this.saveLoc = saveLoc
         saveFile = new File(saveLoc + System.getProperty("file.separator") + FILENAME)
         if(saveFile.exists()){
@@ -176,7 +176,7 @@ class Notes{
     }
     def add(note){
         allNotes[note.title] = note.contents
-        println "added note: ${note.    title} with contents: ${note.contents}"
+        //println "added note: ${note.    title} with contents: ${note.contents}"
     }
     
     def getNote(title){
@@ -192,14 +192,14 @@ class Notes{
     
     def findNotes(searchString){
         allNotes.findAll{ k, v ->
-            println "key: $k, contains? ${k.contains(searchString)}"
+            //println "key: $k, contains? ${k.contains(searchString)}"
             k.contains(searchString)
         }
     }
     
     def save(){
         // creates it if it doesnt exist
-        println "notes.save called"
+        // println "notes.save called"
         saveFile.write(JsonOutput.prettyPrint(JsonOutput.toJson(allNotes)))
     }
 }

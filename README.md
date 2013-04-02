@@ -63,4 +63,4 @@ TODOs
 	- remove duplication in save on exit/ incremental save
 	- save on exit as well
 	- see if there's a more groovy way of doing setNoteContent()
-	- remove debug prints
+	- [FIXED] remove debug prints
