@@ -33,7 +33,14 @@ class JNVLauncher{
                     title           :'jNV', defaultCloseOperation:JFrame.EXIT_ON_CLOSE, 
                     pack            :true, 
                     show            :true,
-                    preferredSize   : [520,600]
+                    preferredSize   : [520,600],
+                    windowClosing   : {
+                        //TODO: remove cut paste from autosaver
+                        def doc = swing.noteContent.document
+                        def text = doc.getText(doc.startPosition.offset, doc.length)
+                        NOTES.setNote(swing.noteName.text, text)
+                        NOTES.save()
+                    }
         ) 
         {
             vbox {
