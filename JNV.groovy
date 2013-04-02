@@ -59,10 +59,8 @@ class JNVLauncher{
                                 background          : Color.WHITE,
                                 model               : listModel,
                                 selectedIndex       : 0,
-                                valueChanged        : { lse ->
-                                    def selectedNote = swing.foundNotes.selectedValue
-                                    swing.noteContent.selectAll()
-                                    swing.noteContent.replaceSelection(NOTES.getNote(selectedNote))
+                                valueChanged        : {
+                                    setNoteContent()
                                 }
                         )
                     }
@@ -79,8 +77,15 @@ class JNVLauncher{
         }
         // TODO: the params here are total hacks. fix this.
         swing.noteContent.document.addDocumentListener(new AutoSaver(swing, NOTES))
+        setNoteContent()
 
         ui.show()
+    }
+
+    def setNoteContent(){
+        def selectedNote = swing.foundNotes.selectedValue
+        swing.noteContent.selectAll()
+        swing.noteContent.replaceSelection(NOTES.getNote(selectedNote))
     }
 }
 
