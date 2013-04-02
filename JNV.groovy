@@ -41,7 +41,7 @@ class JNVLauncher{
                                 actionPerformed : { 
                                     def nName = swing.noteName.getText()
                                     def searchResult = NOTES.findNotes(nName)
-                                    println(searchResult)
+                                    //println(searchResult)
                                     if(!searchResult){
                                         NOTES.add(new Note(nName))
                                         swing.noteContent.requestFocus()
