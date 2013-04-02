@@ -3,6 +3,7 @@ import javax.swing.*
 import javax.swing.event.*
 import javax.swing.text.*
 import java.awt.*
+import java.awt.event.*
 
 import groovy.json.*
 
@@ -76,7 +77,17 @@ class JNVLauncher{
                         //verticalScrollBarPolicy: JScrollPane.VERTICAL_SCROLLBAR_ALWAYS
                         ){
                         // removed size to make it scrollable. Eureka link: http://stackoverflow.com/a/9624094
-                        textArea(id: 'noteContent')
+                        textArea(
+                                id          : 'noteContent',
+                                // this is from http://stackoverflow.com/a/5043957's 'Use a keylistener' solution
+                                keyPressed  : { e ->
+                                    if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
+                                        e.consume();
+                                        KeyboardFocusManager.
+                                            getCurrentKeyboardFocusManager().focusPreviousComponent();
+                                    }
+                                } 
+                            )
                         //noteContent.addDocumentListener(new MyDocumentListener())
                     }
             }

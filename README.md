@@ -38,7 +38,7 @@ TODOs
 
 - Functional
 	- keyboard accelerators for all ui controls. TBD: find out what NV has for the controls
-		- shift tab from note contents should switch to note list.
+		- [FIXED] shift tab from note contents should switch to note list.
 	- on start, the following is true:
 		- [FIXED] focus is on note name textfield
 		- [FIXED] list has all notes, 
