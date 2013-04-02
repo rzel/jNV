@@ -62,6 +62,9 @@ class JNVLauncher{
                                 model               : listModel,
                                 selectedIndex       : 0,
                                 valueChanged        : {
+                                    // set the note title to the selected value
+                                    swing.noteName.text = swing.foundNotes.selectedValue
+                                    // now set the content to reflect the selection as well
                                     setNoteContent()
                                 }
                         )
