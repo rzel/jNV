@@ -1,4 +1,3 @@
-// was figuring out how to get the list to display contents of note when an item is selected
 import groovy.swing.SwingBuilder
 import javax.swing.*
 import javax.swing.event.*
