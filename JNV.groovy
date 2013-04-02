@@ -47,6 +47,8 @@ class JNVLauncher{
                                         swing.noteContent.requestFocus()
                                     }
                                     else{
+                                        // clear out list's model first
+                                        swing.foundNotes.model.removeAllElements()
                                         searchResult.each { k,v ->
                                             swing.foundNotes.model.addElement k
                                         }
