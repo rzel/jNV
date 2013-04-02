@@ -14,6 +14,11 @@ Create a NV clone in Java/Groovy that:
 	- flow from top to bottom
 	- autosave
 
+Future Goals
+------------
+
+- tags
+
 Non-goals
 ---------
 
