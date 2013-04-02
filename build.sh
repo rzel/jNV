@@ -1,2 +1,3 @@
-groovyc -d classes JNV.groovy
-jar cvfm bin/jnv.jar MANIFEST.MF -C classes/ .
+if groovyc -d classes JNV.groovy; then
+	jar cvfm bin/jnv.jar MANIFEST.MF -C classes/ .
+fi
