@@ -52,6 +52,7 @@ class JNVLauncher{
                                         searchResult.each { k,v ->
                                             swing.foundNotes.model.addElement k
                                         }
+                                        swing.foundNotes.selectedIndex = 0
                                     }
                                 }
                     )
