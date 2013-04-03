@@ -67,4 +67,4 @@ TODOs
 	- move to a pure java+swing solution: reduce size of binary drastically.
 	- [FIXED] remove debug prints
 - bugs
-	1. on start, the note contents are loaded, but the note title is not. this results in an unnamed note with the contents of the first actual note.
+	1. [FIXED] on start, the note contents are loaded, but the note title is not. this results in an unnamed note with the contents of the first actual note. FIXED by not setting focus to the list after a search. user has to manually select items, upon which their contents will be shown in the textarea. The problem was that the search automatically set focus to the first item without changing the note title. I was going to change the code such that the note title is also updated after the search, but thought better of it because that would remove the search term of the **search that just happened**. Instead, the user can now browse through the search results and if none of them are satisfying, shift-tab over and and search again, or tab over and fill in content with the search term as note name.
