@@ -17,6 +17,7 @@ class JNVLauncher{
     private NOTES
     private swing
     private listModel = new DefaultListModel()
+    private SEARCHING = false
 
     JNVLauncher(notes){
         NOTES = notes
@@ -47,6 +48,7 @@ class JNVLauncher{
                     textField(  id              : 'noteName',
                                 preferredSize   : [500,20],
                                 actionPerformed : { 
+                                    SEARCHING =  true
                                     def nName = swing.noteName.getText()
                                     def searchResult = NOTES.findNotes(nName)
                                     //println(searchResult)
@@ -63,6 +65,7 @@ class JNVLauncher{
                                         }
                                         //swing.foundNotes.selectedIndex = 0
                                     }
+                                    SEARCHING = false
                                 }
                     )
                     scrollPane(preferredSize: [500,150]){
@@ -72,8 +75,12 @@ class JNVLauncher{
                                 model               : listModel,
                                 selectedIndex       : 0,
                                 valueChanged        : {
-                                    // set the note title to the selected value
-                                    swing.noteName.text = swing.foundNotes.selectedValue
+                                    // when still in search mode, this event is triggered by elemnts being added/removed
+                                    // from the model. the title should not updated then.
+                                    if(!SEARCHING){
+                                        // set the note title to the selected value
+                                        swing.noteName.text = swing.foundNotes.selectedValue
+                                    }
                                     // now set the content to reflect the selection as well
                                     setNoteContent()
                                 }
