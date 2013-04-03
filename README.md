@@ -72,4 +72,5 @@ TODOs
 	2. [FIXED] list not blank when no search results found
 	3. [FIXED] enter a search term that results in no match and close the app. now there's a new note with the search term as title and the first note's contents as its contents. FIXED by solution to #2. 
 	4. [FIXED] start up, enter a search term with no match. search term disappears after search finishes.
-	5. start up, enter a search term with no match, then close app. now there's a note with the search term and blank contents.
+	5. [FIXED] start up, enter a search term with no match, then close app. now there's a note with the search term and blank contents. FIXED BY: quite a few changes, actually. Before, if the search didnt return a match, a new note with null contents was created automatically. This required the Note class and the Notes.add(Note) method. setNote did essentially the same thing, so i removed the Note class, removed its use in handling the empty search results and moved the whole "create new note" functionality to the save bits. if the title and contents are non-blank, a new note will be saved.
+	

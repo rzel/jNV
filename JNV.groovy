@@ -39,7 +39,9 @@ class JNVLauncher{
                         //TODO: remove cut paste from autosaver
                         def doc = swing.noteContent.document
                         def text = doc.getText(doc.startPosition.offset, doc.length)
-                        NOTES.setNote(swing.noteName.text, text)
+                        if(swing.noteName.text != "" && text != ""){
+                            NOTES.setNote(swing.noteName.text, text)
+                        }
                         NOTES.save()
                     }
         ) 
@@ -56,7 +58,6 @@ class JNVLauncher{
                                     swing.foundNotes.model.removeAllElements()
 
                                     if(!searchResult){
-                                        NOTES.add(new Note(nName))
                                         swing.noteContent.requestFocus()
                                     }
                                     else{
@@ -147,7 +148,9 @@ class AutoSaver implements DocumentListener {
         if(COUNT == SAVE_AT){
             def doc = swing.noteContent.document
             def text = doc.getText(doc.startPosition.offset, doc.length)
-            notes.setNote(swing.noteName.text, text)
+            if(swing.noteName.text != "" && text != ""){
+                notes.setNote(swing.noteName.text, text)
+            }
             notes.save();
             COUNT = 0
             //println "saved notecontent:$text"
@@ -156,13 +159,6 @@ class AutoSaver implements DocumentListener {
     }
 }
 
-
-class Note{
-    def title
-    def contents
-    
-    Note(title) {this.title=title}
-}
 
 class Notes{
     private allNotes = [:]
@@ -182,11 +178,7 @@ class Notes{
             saveFile.createNewFile()
         }
     }
-    def add(note){
-        allNotes[note.title] = note.contents
-        //println "added note: ${note.    title} with contents: ${note.contents}"
-    }
-    
+
     def getNote(title){
         allNotes[title]
     }
