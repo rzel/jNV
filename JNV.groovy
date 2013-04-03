@@ -67,7 +67,6 @@ class JNVLauncher{
                                 layoutOrientation   : JList.VERTICAL,
                                 background          : Color.WHITE,
                                 model               : listModel,
-                                selectedIndex       : 0,
                                 valueChanged        : {
                                     // when still in search mode, this event is triggered by elemnts being added/removed
                                     // from the model. the title should not updated then.
