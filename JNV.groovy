@@ -88,9 +88,11 @@ class JNVLauncher{
                         ){
                         // removed size to make it scrollable. Eureka link: http://stackoverflow.com/a/9624094
                         textArea(
-                                id          : 'noteContent',
+                                id              : 'noteContent',
+                                lineWrap        : true,
+                                wrapStyleWord   : true,
                                 // this is from http://stackoverflow.com/a/5043957's 'Use a keylistener' solution
-                                keyPressed  : { e ->
+                                keyPressed      : { e ->
                                     if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
                                         e.consume()
                                         // fix for issue #6
@@ -174,7 +176,35 @@ class Notes{
         }
         else{
             saveFile.createNewFile()
-            setNote("About", "This is a clone of Notational Velocity written in Java/Groovy")
+            setNote("About", """
+    This is a clone of Notational Velocity written in Java/Groovy.
+    Please see http://notational.net for the original App.
+
+    The text below is abridged from the NV website and provided as an overview for users not familiar with the original NV.
+
+    NOTATIONAL VELOCITY is an application that stores and retrieves notes.
+    UNIQUE CHARACTERISTICS
+    ======================
+        - Modeless Operation : Searching for notes is not a separate action; rather, it is the primary interface.
+        - [TBD in jNV] Incremental Search : Searching encompasses all notes' content and occurs instantly with each key pressed.
+        - [Non-goal in jNV] Transparent Database Encryption : All content is compressed and encrypted (enabled optionally) before it is recorded to disk.
+        - Mouseless Interaction : Notational Velocity's window was designed for keyboard input above all else, and thus has no buttons.
+        - Data Instead of Documents : There is no manual "saving" in Notational Velocity; all modifications take effect immediately. 
+
+    HOW IT WORKS
+    ============
+    The UI has 3 areas: The search/title text field, the filtered note list and the content of the selected note.
+
+    The search/title text field is used both for creating notes and searching. i.e., in the process of entering the title for a new note, related notes appear below, letting users file information there if they choose. Likewise, if a search reveals nothing, one need simply press return to create a note with the appropriate title.
+
+    [TBD in jNV] If a note's title starts with the search term(s), that title will be "auto-completed". This selects the note and consequently displays it. Correspondingly, selecting a note places its title in the search area (De-selecting the note restores the search terms).
+
+    To create a new note, just type its title and press return. Edit the note as needed in the bottom pane.
+
+    To view or edit an existing note, type one or more words contained in its body [TBD in jNV] or title. Reveal a note's content by using the up/down arrow keys to select it.
+
+    To make good use of NV, try to maintain one detail/fact/item per note. Notational Velocity's strength, note-filtering, is diminished when only a few notes contain most of the content in the database.        
+                """)
         }
     }
 
