@@ -106,7 +106,7 @@ class JNVLauncher{
             }
         }
         // TODO: the params here are total hacks. fix this.
-        swing.noteContent.document.addDocumentListener(new AutoSaver(swing, NOTES))
+        swing.noteContent.document.addDocumentListener(new AutoSaver(this))
         setNoteContent()
 
         ui.show()
