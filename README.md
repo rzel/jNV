@@ -39,11 +39,11 @@ TODOs
 - Functional
 	- keyboard accelerators for all ui controls. TBD: find out what NV has for the controls
 		- [FIXED] shift tab from note contents should switch to note list.
-		- down arrow from note title should switch to note list
+		- [WONTFIX] down arrow from note title should switch to note list. WONTFIX BCOS tab is sufficient for now.
 	- on start, the following is true:
 		- [FIXED] focus is on note name textfield
 		- [FIXED] list has all notes, 
-			- [FIXED] first note is selected.
+			- [UNFIXED] first note is selected. UNFIXED BCOS found this to be not the best usability.
 		- [FIXED] selected note's contents are shown in text area
 	- on change of text field (enter for now):
 		- [FIXED] list has notes that match, 
@@ -59,6 +59,8 @@ TODOs
 	- [NOMINALLY FIXED] save doesnt work correctly; not all text saved.
 	- [NOMINALLY FIXED] add credits, link to original. NOMINALLY FIXED by adding an "About" note.
 	- add last modified date/time stamp to each note
+		- convert list to a table and show dtstamp in a column.
+	- add ability to delete note
 - Technical
 	- [FIXED] sphagetti code; needs reorg within the groovy file and possibly move to multiple files
 	- change autosave logic to be time-based instead of event-based as it is currently.
@@ -74,4 +76,4 @@ TODOs
 	4. [FIXED] start up, enter a search term with no match. search term disappears after search finishes.
 	5. [FIXED] start up, enter a search term with no match, then close app. now there's a note with the search term and blank contents. FIXED BY: quite a few changes, actually. Before, if the search didnt return a match, a new note with null contents was created automatically. This required the Note class and the Notes.add(Note) method. setNote did essentially the same thing, so i removed the Note class, removed its use in handling the empty search results and moved the whole "create new note" functionality to the save bits. if the title and contents are non-blank, a new note will be saved.
 	6. [FIXED] start a new note, type in some text (< 20 chars) and shift-tab out. note is not saved. FIXED BY adding autosave logic to shift-tab handler as well. Used this as the time to refactor out the incremental save logic as this was to be the third place the same logic would be copy-pasted into. Finally refactored AutoSaver as well and added a new method saveIncremental() to JNVLauncher.
-	
+
