@@ -50,13 +50,14 @@ class JNVLauncher{
                                     def nName = swing.noteName.getText()
                                     def searchResult = NOTES.findNotes(nName)
                                     //println(searchResult)
+                                    // clear out list's model first regardless of search outcome.
+                                    swing.foundNotes.model.removeAllElements()
+
                                     if(!searchResult){
                                         NOTES.add(new Note(nName))
                                         swing.noteContent.requestFocus()
                                     }
                                     else{
-                                        // clear out list's model first
-                                        swing.foundNotes.model.removeAllElements()
                                         searchResult.each { k,v ->
                                             swing.foundNotes.model.addElement k
                                         }
