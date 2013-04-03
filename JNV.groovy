@@ -176,6 +176,7 @@ class Notes{
         }
         else{
             saveFile.createNewFile()
+            setNote("About", "This is a clone of Notational Velocity written in Java/Groovy")
         }
     }
 

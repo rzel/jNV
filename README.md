@@ -57,7 +57,7 @@ TODOs
 	- [FIXED] search results still displays wierd - text is centered and gray bkgnd shows thru
 	- [FIXED] cannot run as executable
 	- [NOMINALLY FIXED] save doesnt work correctly; not all text saved.
-	- add credits, link to original
+	- [NOMINALLY FIXED] add credits, link to original. NOMINALLY FIXED by adding an "About" note.
 	- add last modified date/time stamp to each note
 - Technical
 	- [FIXED] sphagetti code; needs reorg within the groovy file and possibly move to multiple files
