@@ -36,13 +36,7 @@ class JNVLauncher{
                     show            :true,
                     preferredSize   : [520,600],
                     windowClosing   : {
-                        //TODO: remove cut paste from autosaver
-                        def doc = swing.noteContent.document
-                        def text = doc.getText(doc.startPosition.offset, doc.length)
-                        if(swing.noteName.text != "" && text != ""){
-                            NOTES.setNote(swing.noteName.text, text)
-                        }
-                        NOTES.save()
+                        saveIncremental()
                     }
         ) 
         {
@@ -98,9 +92,10 @@ class JNVLauncher{
                                 // this is from http://stackoverflow.com/a/5043957's 'Use a keylistener' solution
                                 keyPressed  : { e ->
                                     if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
-                                        e.consume();
-                                        KeyboardFocusManager.
-                                            getCurrentKeyboardFocusManager().focusPreviousComponent();
+                                        e.consume()
+                                        // fix for issue #6
+                                        saveIncremental()
+                                        KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent()
                                     }
                                 } 
                             )
@@ -120,6 +115,15 @@ class JNVLauncher{
         swing.noteContent.selectAll()
         swing.noteContent.replaceSelection(NOTES.getNote(selectedNote))
     }
+
+    def synchronized saveIncremental(){
+        def doc = swing.noteContent.document
+        def text = doc.getText(doc.startPosition.offset, doc.length)
+        if(swing.noteName.text != "" && text != ""){
+            NOTES.setNote(swing.noteName.text, text)
+        }
+        NOTES.save()
+    }
 }
 
 // TODO: MAKE THE AUTOSAVE ACTUALLY SANE. RIGHT NOW ALL IT DOES IS SAVE THE WHOLE CONTENT AGAIN AND AGAIN EVERY 20 EVENTS
@@ -127,12 +131,10 @@ class AutoSaver implements DocumentListener {
 
     private static int COUNT = 0;
     private static final int SAVE_AT = 20;     // save at 20 events
-    def swing
-    def notes
+    def jnv
     
-    public AutoSaver(swing, notes){
-        this.swing = swing
-        this.notes = notes
+    public AutoSaver(jnv){
+        this.jnv = jnv
     }
     public void insertUpdate(DocumentEvent e) {
         saveIfRequired(e);
@@ -143,15 +145,11 @@ class AutoSaver implements DocumentListener {
     public void changedUpdate(DocumentEvent e) {
         //Plain text components do not fire these events
     }
+    //TODO: do both saveIfRequired()s need to be synchronized?
     public synchronized saveIfRequired(e){
         //println "saveifeqd: $COUNT"
         if(COUNT == SAVE_AT){
-            def doc = swing.noteContent.document
-            def text = doc.getText(doc.startPosition.offset, doc.length)
-            if(swing.noteName.text != "" && text != ""){
-                notes.setNote(swing.noteName.text, text)
-            }
-            notes.save();
+            jnv.saveIncremental()
             COUNT = 0
             //println "saved notecontent:$text"
         }

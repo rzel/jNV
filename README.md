@@ -63,7 +63,7 @@ TODOs
 	- [FIXED] sphagetti code; needs reorg within the groovy file and possibly move to multiple files
 	- change autosave logic to be time-based instead of event-based as it is currently.
 	- [FIXED] save on exit as well
-	- remove duplication in save on exit/ incremental save
+	- [FIXED] remove duplication in save on exit/ incremental save. FIXED as part of issue #6.
 	- see if there's a more groovy way of doing setNoteContent()
 	- move to a pure java+swing solution: reduce size of binary drastically.
 	- [FIXED] remove debug prints
@@ -73,4 +73,5 @@ TODOs
 	3. [FIXED] enter a search term that results in no match and close the app. now there's a new note with the search term as title and the first note's contents as its contents. FIXED by solution to #2. 
 	4. [FIXED] start up, enter a search term with no match. search term disappears after search finishes.
 	5. [FIXED] start up, enter a search term with no match, then close app. now there's a note with the search term and blank contents. FIXED BY: quite a few changes, actually. Before, if the search didnt return a match, a new note with null contents was created automatically. This required the Note class and the Notes.add(Note) method. setNote did essentially the same thing, so i removed the Note class, removed its use in handling the empty search results and moved the whole "create new note" functionality to the save bits. if the title and contents are non-blank, a new note will be saved.
+	6. [FIXED] start a new note, type in some text (< 20 chars) and shift-tab out. note is not saved. FIXED BY adding autosave logic to shift-tab handler as well. Used this as the time to refactor out the incremental save logic as this was to be the third place the same logic would be copy-pasted into. Finally refactored AutoSaver as well and added a new method saveIncremental() to JNVLauncher.
 	
