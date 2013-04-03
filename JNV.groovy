@@ -29,7 +29,6 @@ class JNVLauncher{
     def createAndShowUI(){
         swing = new SwingBuilder()
 
-        // TODO: add close hook so that unsaved data is saved before close
         def ui = swing.frame(
                     title           :'jNV', defaultCloseOperation:JFrame.EXIT_ON_CLOSE, 
                     pack            :true, 
