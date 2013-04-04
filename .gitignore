@@ -1,3 +1,4 @@
-groovy/classes/*
-groovy/bin/*
+*.class
+groovy/bin/groovy*.jar
+
 
