@@ -42,14 +42,15 @@ If you have Groovy installed, you can download `JNV.groovy` and run it like so:
 		groovy JNV.groovy
 
 Alternatively, you can run it as an independent java jar. To run the jar in `groovy/bin`, download
-it to any folder and copy `groovy-all-2.1.0.jar` from `GROOVY_HOME/embeddable` there.
+it to any folder and copy `groovy-all-2.1.0.jar` from `GROOVY_HOME/embeddable` there. Then use the standard java invocation:
 
-Any 2+ version of jar should work as well, but since the jar refers to that specific version in its `MANIFEST.MF`,
+	java -jar jnv.jar
+
+Any 2+ version of jar should work as well, but since the jar refers to a specific version in its `MANIFEST.MF`,
 you'll have to either rename the jar and hope for the best or build the jar after modifying the
 file.
 
-
-Building the source is easy, however. Assuming you have JDK and Groovy installed, run
+Building the source is easy, though. Assuming you have JDK and Groovy installed, run
 
 		cd jnv/groovy/ ./build.sh
 
@@ -62,10 +63,8 @@ Building the source is easy, however. Assuming you have JDK and Groovy installed
 
 While the groovy version is nice, I found myself tending towards a java version for a few reasons:
 
-1. The groovy-all-x.jar adds about 6.7 mb to the app's size. For a simple app like this, that's
-unacceptable.
-2. While developing the groovy version, I had as many tabs with the original Javadocs
-and Swing tutorials opened as I had tabs with Groovy docs; not to mention quite a few stackoveflow tabs for specific groovy questions that the official docs either didnt have answers to or had hidden them well. This is not just a documentation problem, but a comprehension problem: with Java I have to keep "just" the Java platform in my head; with Groovy I have to keep not just the Groovy platform, but also how it interacts with the underlying Java platform and how that platform works in and of itself.
+1. The groovy-all-x.jar adds about 6.7 mb to the app's size. For a simple app like this, that's unacceptable.
+2. While developing the groovy version, I had as many tabs with the original Javadocs and Swing tutorials opened as I had tabs with Groovy docs; not to mention quite a few stackoveflow tabs for specific groovy questions that the official docs either didnt have answers to or had hidden them well. This is not just a documentation problem, but a comprehension problem: with Java I have to keep "just" the Java platform in my head; with Groovy I have to keep not just the Groovy platform, but also how it interacts with the underlying Java platform and how that platform works in and of itself.
 
 #### Status
 
