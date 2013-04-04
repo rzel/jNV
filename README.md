@@ -65,6 +65,8 @@ While the groovy version is nice, I found myself tending towards a java version 
 
 1. The groovy-all-x.jar adds about 6.7 mb to the app's size. For a simple app like this, that's unacceptable.
 2. While developing the groovy version, I had as many tabs with the original Javadocs and Swing tutorials opened as I had tabs with Groovy docs; not to mention quite a few stackoveflow tabs for specific groovy questions that the official docs either didnt have answers to or had hidden them well. This is not just a documentation problem, but a comprehension problem: with Java I have to keep "just" the Java platform in my head; with Groovy I have to keep not just the Groovy platform, but also how it interacts with the underlying Java platform and how that platform works in and of itself.
+3. Further, while SwingBuilder is a nice sugar layer over the Swing api's, things like the DocumentListener still had to be written in a Java style because SwingBuilder used reflection to detect apis to expose in sugared form: those that followed the Bean convention were readily available (eg, actionPerformed() is available without the need to create a Listener class) but those that didnt were not (eg, DocumentListeners are added using addDocumentListener(), not setDocumentListener()).
+4. Finally, while all code being in one groovy file is nice during the initial stages, it makes it unweildy as the code gets bigger. Yes, I could create separate groovy files, but then I'm yet to get the classpath working on groovy files directly (apparently this is a windows issue); requiring the code to be compiled down to java. Why not then move to native java itself?
 
 #### Status
 
