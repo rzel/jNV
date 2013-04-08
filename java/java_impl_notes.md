@@ -50,3 +50,11 @@ add behaviors:
 		save all notes every x secs
 		save all notes before exit
 
+
+user <---> note title <---+
+                          |
+user <---> note title <---+--> note
+                          |
+user <---> note text  <---+
+                          |
+user <---> app <----------+
