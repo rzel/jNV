@@ -5,16 +5,17 @@ import javax.swing.event.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 
 class JNV{
 	public static void main(String[] args) {
 		JNV jnv = new JNV();
 		Models logicalModels 	= jnv.createModels();
 		// Models viewModels 		= jnv.createViewModels(logicalModels);
-		JFrame ui = jnv.createUI(logicalModels);	// call getInitialState to build ui.
-		// // ignoring the urge to overengineer with state machines for now.
-		// ui.addBehaviors();
-		ui.setVisible(true);
+		HashMap<String,Component> ui = jnv.createUI(logicalModels);	// call getInitialState to build ui.
+		// ignoring the urge to overengineer with state machines for now.
+		jnv.addBehaviors(ui,logicalModels);
+		ui.get("window").setVisible(true);
 	}
 
 	public JNV(){}
@@ -36,16 +37,12 @@ class JNV{
 	// 	models.add("notecontents", new NoteContents(logicalNotes));
 	// }
 
-	private boolean SEARCHING = false;
 
-	public JFrame createUI(Models models){
+	public HashMap<String,Component> createUI(Models models){
+		HashMap<String,Component> controls = new HashMap<String,Component>();
 		JTextField noteName = new JTextField();
 		noteName.setPreferredSize(new Dimension(500,25));
-		noteName.addActionListener( new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				SEARCHING = true;
-				System.out.println("searching");
-			}
+		controls.put("noteName", noteName);
 		}
 		);
 
@@ -53,30 +50,54 @@ class JNV{
 		foundNotes.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane foundNotesScroller = new JScrollPane(foundNotes);
 		foundNotesScroller.setPreferredSize(new Dimension(500,150));
+		controls.put("foundNotes", foundNotes);
 
 		JTextArea noteContent = new JTextArea();
 		noteContent.setLineWrap(true);
 		noteContent.setWrapStyleWord(true);
 		JScrollPane noteContentScroller = new JScrollPane(noteContent);
 		noteContentScroller.setPreferredSize(new Dimension(500,400));
+		controls.put("noteContent", noteContent);
+
+		Box vbox = Box.createVerticalBox();
+		vbox.add(noteName);
+		vbox.add(foundNotesScroller);
+		vbox.add(noteContentScroller);
 
 		JFrame ui = new JFrame("jNV");
 		ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ui.setPreferredSize(new Dimension(520,600));
-		ui.getContentPane().setLayout(new BoxLayout(ui.getContentPane(),BoxLayout.PAGE_AXIS));
 
-		ui.add(noteName);
-		ui.add(foundNotesScroller);
-		ui.add(noteContentScroller);
-		
+		ui.add(vbox);
+
 		ui.pack();
-		ui.addWindowListener( new WindowAdapter(){
+		controls.put("window", ui);
+		return controls;
+	}
+
+	private boolean SEARCHING = false;
+
+	public void addBehaviors(HashMap<String,Component> ui, final Models models){
+		final JTextField noteName = (JTextField)ui.get("noteName");
+		final JList foundNotes = (JList)ui.get("foundNotes");
+		final JTextArea noteContent = (JTextArea)ui.get("noteContent");
+		final JFrame window = (JFrame)ui.get("window");
+
+		final Notes notes = (Notes) models.get("notes");
+
+		noteName.addActionListener( new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				SEARCHING = true;
+			}
+		}
+		);
+
+		window.addWindowListener( new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				saveIncremental();
 			}
 		}
 		);
-		return ui;
 	}
 
 	private void saveIncremental(){
