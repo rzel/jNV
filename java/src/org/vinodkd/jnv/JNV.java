@@ -23,7 +23,6 @@ class JNV{
 
 	public Models createModels(){
 		Notes notes = new Notes();
-		notes.getInitialValue();
 		Models models = new Models();
 		models.add("notes",notes);
 		return models;
@@ -41,13 +40,20 @@ class JNV{
 
 	public HashMap<String,Component> createUI(Models models){
 		HashMap<String,Component> controls = new HashMap<String,Component>();
+
 		JTextField noteName = new JTextField();
 		noteName.setPreferredSize(new Dimension(500,25));
 		controls.put("noteName", noteName);
-		}
-		);
 
-		JList<String> foundNotes = new JList<String>(new DefaultListModel<String>());
+		// should createUI know about model data? no. kludge for now.
+		@SuppressWarnings("unchecked")
+		HashMap<String,Note> notes = (HashMap<String,Note>)(models.get("notes").getInitialValue());
+		DefaultListModel<String> foundNotesModel = new DefaultListModel<String>();
+		for(String title:notes.keySet()){
+			foundNotesModel.addElement(title);
+		}
+
+		JList<String> foundNotes = new JList<String>(foundNotesModel);
 		foundNotes.setLayoutOrientation(JList.VERTICAL);
 		JScrollPane foundNotesScroller = new JScrollPane(foundNotes);
 		foundNotesScroller.setPreferredSize(new Dimension(500,150));
