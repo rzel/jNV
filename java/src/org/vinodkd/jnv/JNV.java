@@ -6,6 +6,7 @@ import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
+import java.util.List;
 
 class JNV{
 	public static void main(String[] args) {
@@ -88,6 +89,21 @@ class JNV{
 		noteName.addActionListener( new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				SEARCHING = true;
+				String nName = noteName.getText();
+				List<String> searchResult = notes.search(nName);
+
+				// clear out list's model first regardless of search outcome.
+				@SuppressWarnings("unchecked")
+				DefaultListModel<String> fnModel = (DefaultListModel<String>)foundNotes.getModel();
+				fnModel.removeAllElements();
+				if(searchResult.isEmpty()){
+					noteContent.requestFocus();
+				}
+				else{
+					for(String title:searchResult){
+						fnModel.addElement(title);
+					}
+				}
 			}
 		}
 		);

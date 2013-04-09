@@ -1,6 +1,9 @@
 package org.vinodkd.jnv;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
 
 public class Notes implements Model{
 	private HashMap<String,Note> notes = new HashMap<String,Note>();
@@ -30,4 +33,14 @@ public class Notes implements Model{
 		return notes;
 	}
 
+	public List<String> search(String searchText){
+		ArrayList<String> searchResult = new ArrayList<String>();
+		Set<String> titles = notes.keySet();
+		for(String title: titles){
+			if(title.contains(searchText)){
+				searchResult.add(title);
+			}
+		}
+		return searchResult;
+	}
 }
