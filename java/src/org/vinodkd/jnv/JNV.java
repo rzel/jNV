@@ -110,6 +110,7 @@ class JNV{
 						fnModel.addElement(title);
 					}
 				}
+				SEARCHING = false;
 			}
 		}
 		);
