@@ -21,6 +21,8 @@ public class Notes implements Model{
 		notes.put(title,n);
 	}
 
+	public Note get(String title)	{ return notes.get(title);}
+
 	public void load(){
 		// read from file here
 	}

@@ -115,6 +115,20 @@ class JNV{
 		}
 		);
 
+		foundNotes.addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e){
+                // when still in search mode, this event is triggered by elements being added/removed
+                // from the model. the title should not updated then.
+                if(!SEARCHING){
+                    // set the note title to the selected value
+                    String selectedNote = (String)foundNotes.getSelectedValue();
+                    noteName.setText(selectedNote);
+	                // now set the content to reflect the selection as well
+	                setNoteContent(noteContent, notes, selectedNote);
+                }
+
+			}
+		});
 		window.addWindowListener( new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				saveIncremental();
@@ -123,6 +137,11 @@ class JNV{
 		);
 	}
 
+	private void setNoteContent(JTextArea noteContent, Notes notes,String selectedNote){
+        noteContent.selectAll();
+        noteContent.replaceSelection(notes.get(selectedNote).getContents());
+
+	}
 	private void saveIncremental(){
 		System.out.println("saved!");
 	}
