@@ -46,7 +46,7 @@ public class Notes implements Model{
 		String line;
 		try{
 			while((line=br.readLine())!=null){
-				aboutText.append(line);
+				aboutText.append(line);aboutText.append("\n");
 			}
 		}catch(IOException ioe){
 			// TODO: PUT IN DEFAULT TEXT IF THIS FAILS
