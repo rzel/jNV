@@ -8,6 +8,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Map;
+
+import org.stringtree.json.*;
 
 public class Notes implements Model{
 	private HashMap<String,Note> notes = new HashMap<String,Note>();
@@ -33,7 +39,47 @@ public class Notes implements Model{
 	public Note get(String title)	{ return notes.get(title);}
 
 	public void load(){
-		// read from file here
+		if(saveFile.exists()){
+			BufferedReader br;
+			StringBuffer notesAsStr = new StringBuffer("");
+			char[] buf = new char[4000];
+			int chars;
+
+			try{
+				br = new BufferedReader(new FileReader(saveFile));
+				while((chars = br.read(buf,0,4000))!= -1){
+					notesAsStr.append(buf,0,chars);
+				}
+				br.close();
+			}catch(Exception ioe){
+				//TODO: HANDLE IT IF REQD
+				// didnt feel like catching each exception separately: IOException, FileNotFoundException.
+			}
+
+			JSONReader notesReader = new JSONReader();
+
+			// System.out.println("read json:" + notesAsStr);
+
+			//notes = (HashMap<String,Note>)
+			Object allNotes = notesReader.read(notesAsStr.toString());
+			if(allNotes != null){
+				fromJson(allNotes);
+			}
+		}
+	}
+
+	private void fromJson(Object allNotes){
+		@SuppressWarnings("unchecked")
+		Map<Object,Object> map = (Map<Object,Object>) allNotes;
+
+		 Set<Object> keys = map.keySet();
+		 for(Object o: keys){
+		 	Note n = new Note("","");
+		 	n.fromJson(map.get(o));
+		 	JSONWriter jsw = new JSONWriter();
+		 	System.out.println("note:"+ n.getTitle() + ",date:" + n.getLastModified() + ",date from json:" + jsw.write(n.getLastModified()));
+		 	add(n);
+		 }
 	}
 
 	public void store(){
