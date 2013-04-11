@@ -97,8 +97,10 @@ public class Notes implements Model{
 
 	public Object getInitialValue(){
 		load();
-		Note aboutNote = new Note("About", getAboutText());
-		add(aboutNote);
+		if(!notes.containsKey("About")){
+			Note aboutNote = new Note("About", getAboutText());
+			add(aboutNote);
+		}
 		return notes;
 	}
 
