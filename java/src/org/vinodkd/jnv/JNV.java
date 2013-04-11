@@ -61,6 +61,7 @@ class JNV{
 
 		JTextArea noteContent = new JTextArea();
 		noteContent.setLineWrap(true);
+		noteContent.setTabSize(4);
 		noteContent.setWrapStyleWord(true);
 		JScrollPane noteContentScroller = new JScrollPane(noteContent);
 		noteContentScroller.setPreferredSize(new Dimension(500,400));
@@ -180,6 +181,7 @@ class JNV{
 		Note selectedNote = notes.get(selectedNoteName);
         noteContent.selectAll();
         noteContent.replaceSelection(selectedNote != null ? selectedNote.getContents(): "");
+        noteContent.setCaretPosition(0);
 
 	}
 	private void saveIncremental(JTextArea noteContent,JTextField noteName, Notes notes){
