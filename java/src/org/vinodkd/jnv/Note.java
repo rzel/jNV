@@ -57,7 +57,7 @@ public class Note implements Model{
 		Map<String,Object> jsonDate = (Map<String,Object>)jsonObj;
 		
 		Calendar cal = Calendar.getInstance();
-		System.out.println("year:" + jsonDate.get("year"));
+		//System.out.println("year:" + jsonDate.get("year"));
 		int year 	= ((Long)jsonDate.get("year")).intValue();
 		int month 	= ((Long)jsonDate.get("month")).intValue();
 		int date 	= ((Long)jsonDate.get("date")).intValue();

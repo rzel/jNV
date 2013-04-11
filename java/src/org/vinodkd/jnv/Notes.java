@@ -77,7 +77,7 @@ public class Notes implements Model{
 		 	Note n = new Note("","");
 		 	n.fromJson(map.get(o));
 		 	JSONWriter jsw = new JSONWriter();
-		 	System.out.println("note:"+ n.getTitle() + ",date:" + n.getLastModified() + ",date from json:" + jsw.write(n.getLastModified()));
+		 	//System.out.println("note:"+ n.getTitle() + ",date:" + n.getLastModified() + ",date from json:" + jsw.write(n.getLastModified()));
 		 	add(n);
 		 }
 	}
