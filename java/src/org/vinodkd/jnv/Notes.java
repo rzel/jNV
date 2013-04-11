@@ -114,6 +114,7 @@ public class Notes implements Model{
 			while((line=br.readLine())!=null){
 				aboutText.append(line);aboutText.append("\n");
 			}
+			br.close();
 		}catch(IOException ioe){
 			// TODO: PUT IN DEFAULT TEXT IF THIS FAILS
 		}
