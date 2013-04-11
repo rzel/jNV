@@ -70,4 +70,5 @@ While the groovy version is nice, I found myself tending towards a java version 
 
 #### Status
 
-The Java version is being designed. It will be a source port of the Groovy version for the most part, with some changes described in the implementation notes.
+A basic working version is now available. The same set of instructions as above apply for building and running it. Json support uses [Stringtree.org's json Reader and Writer](http://www.stringtree.org/stringtree-json.html) in source form.
+The jar is ~20k, meeting the original intent of moving to Java.
