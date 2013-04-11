@@ -123,9 +123,9 @@ class JNV{
                     // set the note title to the selected value
                     String selectedNote = (String)foundNotes.getSelectedValue();
                     noteName.setText(selectedNote);
-	                // now set the content to reflect the selection as well
-	                setNoteContent(noteContent, notes, selectedNote);
                 }
+                // now set the content to reflect the selection as well
+                setNoteContent(noteContent, notes, foundNotes);
 
 			}
 		});
@@ -149,9 +149,11 @@ class JNV{
 		);
 	}
 
-	private void setNoteContent(JTextArea noteContent, Notes notes,String selectedNote){
+	private void setNoteContent(JTextArea noteContent, Notes notes,JList foundNotes){
+		String selectedNoteName = (String)foundNotes.getSelectedValue();
+		Note selectedNote = notes.get(selectedNoteName);
         noteContent.selectAll();
-        noteContent.replaceSelection(notes.get(selectedNote).getContents());
+        noteContent.replaceSelection(selectedNote != null ? selectedNote.getContents(): "");
 
 	}
 	private void saveIncremental(){
