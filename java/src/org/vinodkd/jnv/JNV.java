@@ -83,6 +83,8 @@ class JNV{
 	}
 
 	private boolean SEARCHING = false;
+	private int DOC_MOD_EVENT_COUNT = 0;
+	private final int EVENT_COUNT_TO_SAVE_AT = 20;
 
 	public void addBehaviors(HashMap<String,Component> ui, final Models models){
 		final JTextField noteName = (JTextField)ui.get("noteName");
@@ -136,14 +138,37 @@ class JNV{
                 if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
                     e.consume();
                     // fix for issue #6
-                    saveIncremental();
+                    saveIncremental(noteContent,noteName,notes);
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent();
                 }
 			}
 		});
+		noteContent.getDocument().addDocumentListener(new DocumentListener(){
+		    public void insertUpdate(DocumentEvent e) {
+		        saveIfRequired(e);
+		    }
+		    public void removeUpdate(DocumentEvent e) {
+		        saveIfRequired(e);
+		    }
+		    public void changedUpdate(DocumentEvent e) {
+		        //Plain text components do not fire these events
+		    }
+		    //TODO: do both saveIfRequired()s need to be synchronized?
+		    private synchronized void saveIfRequired(DocumentEvent e){
+		        if(DOC_MOD_EVENT_COUNT == EVENT_COUNT_TO_SAVE_AT){
+		            saveIncremental(noteContent,noteName,notes);
+		            DOC_MOD_EVENT_COUNT = 0;
+		        }
+		        else{
+					DOC_MOD_EVENT_COUNT++;
+		        }
+		    }
+
+		});
+
 		window.addWindowListener( new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
-				saveIncremental();
+				saveIncremental(noteContent,noteName,notes);
 			}
 		}
 		);
@@ -156,7 +181,19 @@ class JNV{
         noteContent.replaceSelection(selectedNote != null ? selectedNote.getContents(): "");
 
 	}
-	private void saveIncremental(){
-		System.out.println("saved!");
+	private void saveIncremental(JTextArea noteContent,JTextField noteName, Notes notes){
+        Document doc = noteContent.getDocument();
+        String title = noteName.getText();
+        String text = "";
+        try{
+        	text = doc.getText(doc.getStartPosition().getOffset(), doc.getLength());
+        }catch(BadLocationException ble){
+        	//TODO: HANDLE THIS.
+        }
+
+        if( title != "" && text != ""){
+            notes.set(title, text);
+        }
+        notes.store();
 	}
 }
