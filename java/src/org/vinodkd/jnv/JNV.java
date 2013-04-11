@@ -143,6 +143,7 @@ class JNV{
                 }
 			}
 		});
+
 		noteContent.getDocument().addDocumentListener(new DocumentListener(){
 		    public void insertUpdate(DocumentEvent e) {
 		        saveIfRequired(e);
