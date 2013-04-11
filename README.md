@@ -72,3 +72,9 @@ While the groovy version is nice, I found myself tending towards a java version 
 
 A basic working version is now available. The same set of instructions as above apply for building and running it. Json support uses [Stringtree.org's json Reader and Writer](http://www.stringtree.org/stringtree-json.html) in source form.
 The jar is ~20k, meeting the original intent of moving to Java.
+
+Credits
+-------
+
+1. **Source Idea**: As mentioned above, the original inspiration for jNV is [Notational Velocity](http://notational.net). The implementation, however, uses only the concepts, not the source itself. Since it is open source, however, I might "pick its brains" when/if jNV matures to use the thousands of notes that NV is known to be used for. 
+2. **JSON support**: This version uses [Stringtree.org's json Reader and Writer](http://www.stringtree.org/stringtree-json.html) in source form to enable read/write from/to Json. Again, since this is closer to "proof of concept" and way afar from "production ready" code, such a library is apt. If jNV rises to the levels of NV's use, I'll definitely revisit the json support - maybe convert it to an export format similar to how NV allows exporting to text files. At that point, this credit might be moot; but for now this implementation (and its allowance of using the code in source form, not to mention writing self-contained reader and writer code) is a godsend because the alternative would be to make this a two jar distribution or to use something like One-jar or Shade/Assembly. Shudder.Many thanks, therefore, to the original authors of Stringtree json.
