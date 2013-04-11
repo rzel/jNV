@@ -153,7 +153,9 @@ class AutoSaver implements DocumentListener {
             COUNT = 0
             //println "saved notecontent:$text"
         }
-        COUNT++;
+        else{
+            COUNT++
+        }
     }
 }
 
