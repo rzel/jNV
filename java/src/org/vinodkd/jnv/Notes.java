@@ -13,7 +13,16 @@ public class Notes implements Model{
 	private HashMap<String,Note> notes = new HashMap<String,Note>();
 
 	private final String ABOUTNOTE_lOC = "res/about.txt";
-	public Notes() {}
+
+	private String saveLoc;
+	private File saveFile;
+	private final String FILENAME = "notes.json";
+
+	public Notes(String saveLoc) {
+		this.saveLoc = saveLoc;
+		saveFile = new File(saveLoc + System.getProperty("file.separator") + FILENAME);
+		load();
+	}
 
 	public void add(Note n){ notes.put(n.getTitle(),n);	}
 	public void set(String title, String contents) {
@@ -28,7 +37,16 @@ public class Notes implements Model{
 	}
 
 	public void store(){
-		// write to file here
+		try{	
+			FileWriter fw = new FileWriter(saveFile);
+			String notesAsStr = new JSONWriter().write(notes);
+			// System.out.println("writing json:" + notesAsStr);
+			fw.write(notesAsStr);
+			fw.close();
+			System.out.println("stored in " + saveFile.toString());
+		}catch(Exception e){
+			System.out.println("Problems storing to " + saveFile.toString());
+		}
 	}
 
 	public Object getInitialValue(){
