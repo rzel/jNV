@@ -1,4 +1,3 @@
 *.class
 groovy/bin/groovy*.jar
-bin/
-
+*.hide
