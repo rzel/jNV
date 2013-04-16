@@ -12,17 +12,21 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Map;
+import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import org.stringtree.json.*;
-
-public class Notes implements Model{
+public class Notes implements Model, Serializable{
 	private HashMap<String,Note> notes = new HashMap<String,Note>();
 
-	private final String ABOUTNOTE_lOC = "res/about.txt";
+	private transient final String ABOUTNOTE_lOC = "res/about.txt";
 
-	private String saveLoc;
-	private File saveFile;
-	private final String FILENAME = "notes.json";
+	private transient String saveLoc;
+	private transient File saveFile;
+	private transient final String FILENAME = "notes.ser";
 
 	public Notes(String saveLoc) {
 		this.saveLoc = saveLoc;
@@ -38,57 +42,26 @@ public class Notes implements Model{
 
 	public Note get(String title)	{ return notes.get(title);}
 
+	@SuppressWarnings("unchecked") 
 	public void load(){
 		if(saveFile.exists()){
-			BufferedReader br;
-			StringBuffer notesAsStr = new StringBuffer("");
-			char[] buf = new char[4000];
-			int chars;
-
 			try{
-				br = new BufferedReader(new FileReader(saveFile));
-				while((chars = br.read(buf,0,4000))!= -1){
-					notesAsStr.append(buf,0,chars);
-				}
-				br.close();
+					ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(saveFile)));
+					notes = (HashMap<String,Note>)ois.readObject();
+					ois.close();
 			}catch(Exception ioe){
 				//TODO: HANDLE IT IF REQD
 				// didnt feel like catching each exception separately: IOException, FileNotFoundException.
 			}
-
-			JSONReader notesReader = new JSONReader();
-
-			// System.out.println("read json:" + notesAsStr);
-
-			//notes = (HashMap<String,Note>)
-			Object allNotes = notesReader.read(notesAsStr.toString());
-			if(allNotes != null){
-				fromJson(allNotes);
-			}
 		}
-	}
-
-	private void fromJson(Object allNotes){
-		@SuppressWarnings("unchecked")
-		Map<Object,Object> map = (Map<Object,Object>) allNotes;
-
-		 Set<Object> keys = map.keySet();
-		 for(Object o: keys){
-		 	Note n = new Note("","");
-		 	n.fromJson(map.get(o));
-		 	JSONWriter jsw = new JSONWriter();
-		 	//System.out.println("note:"+ n.getTitle() + ",date:" + n.getLastModified() + ",date from json:" + jsw.write(n.getLastModified()));
-		 	add(n);
-		 }
 	}
 
 	public void store(){
 		try{	
-			FileWriter fw = new FileWriter(saveFile);
-			String notesAsStr = new JSONWriter().write(notes);
-			// System.out.println("writing json:" + notesAsStr);
-			fw.write(notesAsStr);
-			fw.close();
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(saveFile));
+			oos.writeObject(notes);
+			oos.flush();
+			oos.close();
 			System.out.println("stored in " + saveFile.toString());
 		}catch(Exception e){
 			System.out.println("Problems storing to " + saveFile.toString());

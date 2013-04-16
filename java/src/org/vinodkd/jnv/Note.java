@@ -5,8 +5,9 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Map;
+import java.io.Serializable;
 
-public class Note implements Model{
+public class Note implements Model, Serializable{
 	private String 	title;
 	private String 	contents;
 	private Date	lastModified;
