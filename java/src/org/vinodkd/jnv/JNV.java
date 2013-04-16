@@ -22,7 +22,9 @@ class JNV{
 	public JNV(){}
 
 	public Models createModels(){
-		Notes notes = new Notes(System.getProperty("user.dir"));
+		NotesStore store = new JsonStore();
+		store.setDir(System.getProperty("user.dir"));
+		Notes notes = new Notes(store);
 		Models models = new Models();
 		models.add("notes",notes);
 		return models;
