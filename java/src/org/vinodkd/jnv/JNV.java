@@ -8,27 +8,27 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.List;
 
-class JNV{
-	public static void main(String[] args) {
-		JNV jnv = new JNV();
-		Models logicalModels 	= jnv.createModels();
+abstract class JNV{
+
+	public JNV(){
+		Models logicalModels 	= createModels();
 		// Models viewModels 		= jnv.createViewModels(logicalModels);
-		HashMap<String,Component> ui = jnv.createUI(logicalModels);	// call getInitialState to build ui.
+		HashMap<String,Component> ui = createUI(logicalModels);	// call getInitialState to build ui.
 		// ignoring the urge to overengineer with state machines for now.
-		jnv.addBehaviors(ui,logicalModels);
+		addBehaviors(ui,logicalModels);
 		ui.get("window").setVisible(true);
 	}
 
-	public JNV(){}
-
 	public Models createModels(){
-		NotesStore store = new JsonStore();
+		NotesStore store = getStore();
 		store.setDir(System.getProperty("user.dir"));
 		Notes notes = new Notes(store);
 		Models models = new Models();
 		models.add("notes",notes);
 		return models;
 	}
+
+	public abstract NotesStore getStore();
 
 	// public Models createViewModels(Models logicalModels){
 	// 	ViewModels models = new ViewModels();
