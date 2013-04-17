@@ -9,6 +9,8 @@ Tue Apr 16 10:28:46 2013 : Basic version working both in Java and Groovy. Curren
 [] Make the search results display the last modified date as well
 [] Make the contents rich text
 [] Convert the About note into rich text
+[] Release v 1.0
+[] Revert GUI code to the simpler "coding patterns" described at the end of [the GUI essay](./On \creating \a \gui.md)
 [] Allow "export to json" from main app.
  
 Wed Apr 17 06:53:39 2013 : In a bit of a quandry getting this modularized storage working.I've done the work required to externalize storage and written JsonStore and SerializedStore, but I'd like to do the following:
