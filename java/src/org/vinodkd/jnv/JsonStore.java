@@ -99,7 +99,7 @@ public class JsonStore implements NotesStore{
 		int hour 	= ((Long)jsonDate.get("hours")).intValue();
 		int mins 	= ((Long)jsonDate.get("minutes")).intValue();
 		int secs 	= ((Long)jsonDate.get("seconds")).intValue();
-		// cal.set(year, month, date, hour, mins, secs);
+		cal.set(year, month, date, hour, mins, secs);
 		// TimeZone calTZ = cal.getTimeZone();
 		// calTZ.setRawOffset(((Long)jsonDate.get("timezoneOffset")).intValue());
 		return cal.getTime();
