@@ -8,9 +8,9 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.List;
 
-abstract class JNV{
+abstract class JNVBase{
 
-	public JNV(){
+	public JNVBase(){
 		Models logicalModels 	= createModels();
 		// Models viewModels 		= jnv.createViewModels(logicalModels);
 		HashMap<String,Component> ui = createUI(logicalModels);	// call getInitialState to build ui.
