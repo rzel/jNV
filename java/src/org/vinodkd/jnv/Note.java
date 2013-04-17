@@ -1,8 +1,9 @@
 package org.vinodkd.jnv;
 
 import java.util.Date;
+import java.io.Serializable;
 
-public class Note implements Model{
+public class Note implements Model, Serializable{
 	private String 	title;
 	private String 	contents;
 	private Date	lastModified;
