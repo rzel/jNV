@@ -3,10 +3,12 @@ package org.vinodkd.jnv;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Date;
 
 abstract class JNVBase{
 
@@ -50,13 +52,18 @@ abstract class JNVBase{
 		// should createUI know about model data? no. kludge for now.
 		@SuppressWarnings("unchecked")
 		HashMap<String,Note> notes = (HashMap<String,Note>)(models.get("notes").getInitialValue());
-		DefaultListModel<String> foundNotesModel = new DefaultListModel<String>();
+
+		String[] columnNames = {"Title", "Last Modified"};
+		DefaultTableModel foundNotesModel = new DefaultTableModel(columnNames,0);
+		// TODO: figure out why an extra blank rows shows up
 		for(String title:notes.keySet()){
-			foundNotesModel.addElement(title);
+			foundNotesModel.addRow(new Object[] {title, notes.get(title).getLastModified()});
 		}
 
-		JList<String> foundNotes = new JList<String>(foundNotesModel);
-		foundNotes.setLayoutOrientation(JList.VERTICAL);
+		JTable foundNotes = new JTable(foundNotesModel);
+		foundNotes.setFillsViewportHeight(true);
+		foundNotes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
 		JScrollPane foundNotesScroller = new JScrollPane(foundNotes);
 		foundNotesScroller.setPreferredSize(new Dimension(500,150));
 		controls.put("foundNotes", foundNotes);
@@ -91,7 +98,7 @@ abstract class JNVBase{
 
 	public void addBehaviors(HashMap<String,Component> ui, final Models models){
 		final JTextField noteName = (JTextField)ui.get("noteName");
-		final JList foundNotes = (JList)ui.get("foundNotes");
+		final JTable foundNotes = (JTable)ui.get("foundNotes");
 		final JTextArea noteContent = (JTextArea)ui.get("noteContent");
 		final JFrame window = (JFrame)ui.get("window");
 
@@ -105,14 +112,14 @@ abstract class JNVBase{
 
 				// clear out list's model first regardless of search outcome.
 				@SuppressWarnings("unchecked")
-				DefaultListModel<String> fnModel = (DefaultListModel<String>)foundNotes.getModel();
-				fnModel.removeAllElements();
+				DefaultTableModel fnModel = (DefaultTableModel)foundNotes.getModel();
+				fnModel.setRowCount(0);
 				if(searchResult.isEmpty()){
 					noteContent.requestFocus();
 				}
 				else{
 					for(String title:searchResult){
-						fnModel.addElement(title);
+						fnModel.addRow(new Object[] {title, new Date()});	//TODO: FIX THIS
 					}
 				}
 				SEARCHING = false;
@@ -120,18 +127,17 @@ abstract class JNVBase{
 		}
 		);
 
-		foundNotes.addListSelectionListener(new ListSelectionListener(){
+		foundNotes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e){
                 // when still in search mode, this event is triggered by elements being added/removed
                 // from the model. the title should not updated then.
                 if(!SEARCHING){
                     // set the note title to the selected value
-                    String selectedNote = (String)foundNotes.getSelectedValue();
+                    String selectedNote = (String)foundNotes.getValueAt(foundNotes.getSelectedRow(),0);
                     noteName.setText(selectedNote);
+	                // now set the content to reflect the selection as well
+	                setNoteContent(noteContent, notes, foundNotes);
                 }
-                // now set the content to reflect the selection as well
-                setNoteContent(noteContent, notes, foundNotes);
-
 			}
 		});
 
@@ -178,8 +184,8 @@ abstract class JNVBase{
 		);
 	}
 
-	private void setNoteContent(JTextArea noteContent, Notes notes,JList foundNotes){
-		String selectedNoteName = (String)foundNotes.getSelectedValue();
+	private void setNoteContent(JTextArea noteContent, Notes notes,JTable foundNotes){
+		String selectedNoteName = (String)foundNotes.getValueAt(foundNotes.getSelectedRow(),0);
 		Note selectedNote = notes.get(selectedNoteName);
         noteContent.selectAll();
         noteContent.replaceSelection(selectedNote != null ? selectedNote.getContents(): "");
