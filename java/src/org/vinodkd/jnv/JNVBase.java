@@ -193,10 +193,10 @@ abstract class JNVBase{
         try{
         	text = doc.getText(doc.getStartPosition().getOffset(), doc.getLength());
         }catch(BadLocationException ble){
-        	//TODO: HANDLE THIS.
+        	System.out.println("text exception:" + ble);
         }
 
-        if( title != "" && text != ""){
+        if( !"".equals(title) && !"".equals(text)){
             notes.set(title, text);
         }
         notes.store();
