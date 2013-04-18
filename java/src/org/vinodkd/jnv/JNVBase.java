@@ -53,13 +53,7 @@ abstract class JNVBase{
 		@SuppressWarnings("unchecked")
 		HashMap<String,Note> notes = (HashMap<String,Note>)(models.get("notes").getInitialValue());
 
-		String[] columnNames = {"Title", "Last Modified"};
-		DefaultTableModel foundNotesModel = new DefaultTableModel(columnNames,0);
-		// TODO: figure out why an extra blank rows shows up
-		for(String title:notes.keySet()){
-			foundNotesModel.addRow(new Object[] {title, notes.get(title).getLastModified()});
-		}
-
+		NoteListTableModel foundNotesModel = new NoteListTableModel(notes);
 		JTable foundNotes = new JTable(foundNotesModel);
 		foundNotes.setFillsViewportHeight(true);
 		foundNotes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -119,7 +113,7 @@ abstract class JNVBase{
 				}
 				else{
 					for(String title:searchResult){
-						fnModel.addRow(new Object[] {title, new Date()});	//TODO: FIX THIS
+						fnModel.addRow(new Object[] {title, notes.get(title).getLastModified()});
 					}
 				}
 				SEARCHING = false;
