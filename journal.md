@@ -38,3 +38,4 @@ Fri Apr 19 18:09:28 2013 : table specific issue: shift tab out of table not work
 
 Fri Apr 19 18:19:13 2013 : Found another issue that is a consequence of the "hit enter to search" simplification: scrolling up and down the search list updates the title. shift tab to the title box leaves the last browsed title as-is. must at least select all text so it can be replaced easily.
 
+Fri Apr 19 18:34:37 2013 : code in branch show_lastModified looks good to be merged.
