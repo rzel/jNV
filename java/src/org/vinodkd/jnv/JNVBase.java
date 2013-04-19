@@ -129,8 +129,11 @@ abstract class JNVBase{
                     // set the note title to the selected value
                     String selectedNote = (String)foundNotes.getValueAt(foundNotes.getSelectedRow(),0);
                     noteName.setText(selectedNote);
-	                // now set the content to reflect the selection as well
-	                setNoteContent(noteContent, notes, foundNotes);
+                }
+                // now set the content to reflect the selection as well
+                setNoteContent(noteContent, notes, foundNotes);
+			}
+		});
                 }
 			}
 		});
@@ -179,10 +182,15 @@ abstract class JNVBase{
 	}
 
 	private void setNoteContent(JTextArea noteContent, Notes notes,JTable foundNotes){
-		String selectedNoteName = (String)foundNotes.getValueAt(foundNotes.getSelectedRow(),0);
-		Note selectedNote = notes.get(selectedNoteName);
+		int selectedRow = foundNotes.getSelectedRow();
+		String content = "";
+		if(selectedRow >=0 ){	// selection exists
+			String selectedNoteName = (String)foundNotes.getValueAt(selectedRow,0);
+			Note selectedNote = notes.get(selectedNoteName);
+			content = selectedNote != null ? selectedNote.getContents(): "";
+		}
         noteContent.selectAll();
-        noteContent.replaceSelection(selectedNote != null ? selectedNote.getContents(): "");
+        noteContent.replaceSelection(content);
         noteContent.setCaretPosition(0);
 
 	}

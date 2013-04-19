@@ -25,3 +25,8 @@ Thu Apr 18 17:50:05 2013 : todos:
 	- remove blank rows from table
 	- [x] make the table read-only
 	- [x] show actual dates
+Fri Apr 19 17:50:58 2013 : in moving to the table, I reintroduced an issue from the groovy days: start fresh, select the about note in the list, then go back to the text box, type a new title. now the list doesnt clear nor are the about note's contents cleared. closing the app now saves a new note with the new title and the about note's contents. fix required:
+	[x] move setNoteContent() out of the the if(SEARCHING)... block
+	[-] implement a true removeAll similar to the JList's removeall. Right now getting by with setItemCount(0).
+		May not be needed. setItemCount seems to work. we'll see.
+
