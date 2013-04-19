@@ -121,6 +121,12 @@ abstract class JNVBase{
 		}
 		);
 
+		noteName.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e){
+				noteName.selectAll();
+			}
+		});
+
 		foundNotes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e){
                 // when still in search mode, this event is triggered by elements being added/removed
@@ -141,7 +147,6 @@ abstract class JNVBase{
                 if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
                     e.consume();
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent();
-                    noteName.selectAll();
                 }
 			}
 		});
@@ -152,10 +157,15 @@ abstract class JNVBase{
                 if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
                     e.consume();
                     // fix for issue #6
-                    saveIncremental(noteContent,noteName,notes);
+                    // saveIncremental(noteContent,noteName,notes);
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent();
-                    noteName.selectAll();
                 }
+			}
+		});
+
+		noteContent.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e){
+				saveIncremental(noteContent,noteName,notes);
 			}
 		});
 
