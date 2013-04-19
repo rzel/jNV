@@ -7,7 +7,7 @@ Note: The todos were extracted out of journal.md quite late in the Java developm
 - [x] Create separate json store version
 - [-] Add json back as an optional format
 - [x] Make the search results display the last modified date as well
-- [] Handle mouse events
+- [x] Handle mouse events
 - [] Make the contents rich text
 - [] Convert the About note into rich text
 - [] Release v 1.0
