@@ -43,3 +43,8 @@ Fri Apr 19 18:09:28 2013 : table specific issue: shift tab out of table not work
 Fri Apr 19 18:19:13 2013 : Found another issue that is a consequence of the "hit enter to search" simplification: scrolling up and down the search list updates the title. shift tab to the title box leaves the last browsed title as-is. must at least select all text so it can be replaced easily.
 
 Fri Apr 19 18:34:37 2013 : code in branch show_lastModified looks good to be merged.
+
+Fri Apr 19 22:43:52 2013 : After reading up a bit, it seems like making mouse work well with jNV really doesnt need handling the mouse; instead it needs focus listeners to be written. Specifically:
+
+- [x] when the text area loses focus due to a mouse click elsewhere, it should save the content again.
+- [x] when the text box gains focus due to a mouse click, it should select all text.
