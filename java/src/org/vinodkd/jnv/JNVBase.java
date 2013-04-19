@@ -141,6 +141,7 @@ abstract class JNVBase{
                 if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
                     e.consume();
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent();
+                    noteName.selectAll();
                 }
 			}
 		});
@@ -153,6 +154,7 @@ abstract class JNVBase{
                     // fix for issue #6
                     saveIncremental(noteContent,noteName,notes);
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent();
+                    noteName.selectAll();
                 }
 			}
 		});

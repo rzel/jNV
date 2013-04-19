@@ -32,3 +32,5 @@ Fri Apr 19 17:50:58 2013 : in moving to the table, I reintroduced an issue from 
 
 Fri Apr 19 18:09:28 2013 : table specific issue: shift tab out of table not working. More precisely, JList did not capture shift tab, so it naturally went to the previous component. JTable might need special handling. Fixed this by copying over the key listener from noteContents minus the autosave. seems to work fine.
 
+Fri Apr 19 18:19:13 2013 : Found another issue that is a consequence of the "hit enter to search" simplification: scrolling up and down the search list updates the title. shift tab to the title box leaves the last browsed title as-is. must at least select all text so it can be replaced easily.
+
