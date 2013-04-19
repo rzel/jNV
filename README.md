@@ -1,7 +1,7 @@
 JNV: Java Notational Velocity
 =============================
 
-JNV is my java-based [Notational Velocity](http://notational.net clone). Its both an exercise at creating a NV clone as well as trying Groovy out as a GUI development language.
+JNV is my java-based [Notational Velocity](http://notational.net) clone. I built it so that I'd have a cross-platform note-taking software; having rejected the idea of installing NV on the mac and Resophnotes on Windows. It was also an exercise at trying Groovy out as a GUI development language, but quickly moved past Groovy to produce a lean Java-based version.
 
 Goal
 ----
@@ -61,7 +61,7 @@ Building the source is easy, though. Assuming you have JDK and Groovy installed,
 
 #### Why
 
-While the groovy version is nice, I found myself tending towards a java version for a few reasons:
+While the groovy version was nice, I found myself tending towards a java version for a few reasons:
 
 1. The groovy-all-x.jar adds about 6.7 mb to the app's size. For a simple app like this, that's unacceptable.
 2. While developing the groovy version, I had as many tabs with the original Javadocs and Swing tutorials opened as I had tabs with Groovy docs; not to mention quite a few stackoveflow tabs for specific groovy questions that the official docs either didnt have answers to or had hidden them well. This is not just a documentation problem, but a comprehension problem: with Java I have to keep "just" the Java platform in my head; with Groovy I have to keep not just the Groovy platform, but also how it interacts with the underlying Java platform and how that platform works in and of itself.
@@ -70,8 +70,12 @@ While the groovy version is nice, I found myself tending towards a java version 
 
 #### Status
 
-A basic working version is now available. The same set of instructions as above apply for building and running it. Json support uses [Stringtree.org's json Reader and Writer](http://www.stringtree.org/stringtree-json.html) in source form.
-The jar is ~20k, meeting the original intent of moving to Java.
+The Java version has superceded the Groovy one in features. It now sports 2 modes of storage: Java Serialization and Json.The jar is ~15k with Java serialization and ~20k with Json support, meeting the original intent of moving to Java. 
+
+The same set of instructions as above apply for building and running it, except that you run the commands from the `java` folder. 
+
+Json support uses [Stringtree.org's json Reader and Writer](http://www.stringtree.org/stringtree-json.html) in source form.
+
 
 Credits
 -------
