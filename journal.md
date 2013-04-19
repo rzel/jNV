@@ -7,6 +7,7 @@ Tue Apr 16 10:28:46 2013 : Basic version working both in Java and Groovy. Curren
 [x] Create separate json store version
 [-] Add json back as an optional format
 [x] Make the search results display the last modified date as well
+[] Handle mouse events
 [] Make the contents rich text
 [] Convert the About note into rich text
 [] Release v 1.0
@@ -25,10 +26,13 @@ Thu Apr 18 17:50:05 2013 : todos:
 	- remove blank rows from table
 	- [x] make the table read-only
 	- [x] show actual dates
+
 Fri Apr 19 17:50:58 2013 : in moving to the table, I reintroduced an issue from the groovy days: start fresh, select the about note in the list, then go back to the text box, type a new title. now the list doesnt clear nor are the about note's contents cleared. closing the app now saves a new note with the new title and the about note's contents. fix required:
 	[x] move setNoteContent() out of the the if(SEARCHING)... block
 	[-] implement a true removeAll similar to the JList's removeall. Right now getting by with setItemCount(0).
 		May not be needed. setItemCount seems to work. we'll see.
+
+Fri Apr 19 18:03:55 2013 : Found an issue thats likely in the groovy version as well. Type something like "a" in the text box and hit enter. App shows search results, which *should* be there after some use of the app because the letter a is in almost every text. Now you will not be able to create a note with that title. Or, more generally: a title which is a substring of an existing title will not be allowed currently as a separate title.
 
 Fri Apr 19 18:09:28 2013 : table specific issue: shift tab out of table not working. More precisely, JList did not capture shift tab, so it naturally went to the previous component. JTable might need special handling. Fixed this by copying over the key listener from noteContents minus the autosave. seems to work fine.
 
