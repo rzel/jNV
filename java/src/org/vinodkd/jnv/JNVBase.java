@@ -134,6 +134,13 @@ abstract class JNVBase{
                 setNoteContent(noteContent, notes, foundNotes);
 			}
 		});
+
+		foundNotes.addKeyListener(new KeyAdapter(){
+			// this is from http://stackoverflow.com/a/5043957's 'Use a keylistener' solution
+			public void keyPressed(KeyEvent e){
+                if (e.getKeyCode() == KeyEvent.VK_TAB &&  e.isShiftDown()){
+                    e.consume();
+                    KeyboardFocusManager.getCurrentKeyboardFocusManager().focusPreviousComponent();
                 }
 			}
 		});

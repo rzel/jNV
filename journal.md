@@ -30,3 +30,5 @@ Fri Apr 19 17:50:58 2013 : in moving to the table, I reintroduced an issue from 
 	[-] implement a true removeAll similar to the JList's removeall. Right now getting by with setItemCount(0).
 		May not be needed. setItemCount seems to work. we'll see.
 
+Fri Apr 19 18:09:28 2013 : table specific issue: shift tab out of table not working. More precisely, JList did not capture shift tab, so it naturally went to the previous component. JTable might need special handling. Fixed this by copying over the key listener from noteContents minus the autosave. seems to work fine.
+
