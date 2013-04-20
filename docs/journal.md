@@ -65,3 +65,5 @@ Sat Apr 20 08:13:11 2013 : Spent a lot of time meandering for a solution to keep
 		});
 
 .. finally the solution turned out to be to set the maximum size to intmax while constraining the height to what i'd wanted. apparently this is not a Swing best practice. But after going through all the layout managers (especially SpringLayout) I decided that solving this the best way in Swing is an exercise for a later date. Moving on after setting max size on the textbox, therefore :)
+
+Sat Apr 20 08:32:34 2013 : I'm starting a new tradition of adding all the browser tabs that were open at the time of coding. This is a poor substitute of saving the whole session itself, but imo it gives an idea of the context surrounding development.
