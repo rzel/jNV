@@ -8,11 +8,12 @@ Note: The todos were extracted out of journal.md quite late in the Java developm
 - [-] Add json back as an optional format
 - [x] Make the search results display the last modified date as well
 - [x] Handle mouse events
-- [] Make the contents rich text
-- [] Convert the About note into rich text
-- [] Release v 1.0
-- [] Revert GUI code to the simpler "coding patterns" described at the end of [the GUI essay](docs/On_creating_a_gui.md)
-- [] Allow "export to json" from main app.
+- [ ] Make UI look proper on maximize.
+- [ ] Release v 1.0
+- [ ] Make the contents rich text
+- [ ] Convert the About note into rich text
+- [ ] Revert GUI code to the simpler "coding patterns" described at the end of [the GUI essay](docs/On_creating_a_gui.md)
+- [ ] Allow "export to json" from main app.
 
 Bugs:
 
