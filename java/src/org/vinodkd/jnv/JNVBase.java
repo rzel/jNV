@@ -53,7 +53,9 @@ abstract class JNVBase{
 		HashMap<String,Component> controls = new HashMap<String,Component>();
 
 		JTextField noteName = new JTextField();
-		noteName.setPreferredSize(new Dimension(500,25));
+		Dimension noteNameD = new Dimension(Integer.MAX_VALUE,NOTENAMEHEIGHT);
+		noteName.setPreferredSize(noteNameD);
+		noteName.setMaximumSize(noteNameD);
 		controls.put("noteName", noteName);
 
 		// should createUI know about model data? no. kludge for now.
@@ -203,8 +205,7 @@ abstract class JNVBase{
 			public void windowClosing(WindowEvent e){
 				saveIncremental(noteContent,noteName,notes);
 			}
-		}
-		);
+		});
 	}
 
 	private void setNoteContent(JTextArea noteContent, Notes notes,JTable foundNotes){

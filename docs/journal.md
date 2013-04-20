@@ -48,3 +48,20 @@ Fri Apr 19 22:43:52 2013 : After reading up a bit, it seems like making mouse wo
 
 - [x] when the text area loses focus due to a mouse click elsewhere, it should save the content again.
 - [x] when the text box gains focus due to a mouse click, it should select all text.
+
+Sat Apr 20 08:13:11 2013 : Spent a lot of time meandering for a solution to keep the title textbox constrained in its height through window resizes. This involved writing code like:
+
+		window.addComponentListener(new ComponentAdapter(){
+			public void componentResized(ComponentEvent e){
+				Dimension wd = window.getSize();
+				APPWIDTH = (int) wd.getWidth();
+				APPHEIGHT = (int) wd.getHeight();
+				// calculateContolHeights();
+
+				noteName.setPreferredSize(new Dimension(APPWIDTH,NOTENAMEHEIGHT));
+				// foundNotes.setSize(new Dimension(APPWIDTH,NOTESLISTHEIGHT));
+				// noteContent.setSize(new Dimension(APPWIDTH,NOTECONTENTHEIGHT));
+			}
+		});
+
+.. finally the solution turned out to be to set the maximum size to intmax while constraining the height to what i'd wanted. apparently this is not a Swing best practice. But after going through all the layout managers (especially SpringLayout) I decided that solving this the best way in Swing is an exercise for a later date. Moving on after setting max size on the textbox, therefore :)
