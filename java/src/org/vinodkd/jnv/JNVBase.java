@@ -41,6 +41,13 @@ abstract class JNVBase{
 	// 	models.add("notecontents", new NoteContents(logicalNotes));
 	// }
 
+	private int APPWIDTH = 500; private int BUFFER = 20;
+	private int APPHEIGHT = 600;
+	private int NOTENAMEHEIGHT = 25;
+	private int NOTESLISTPC = 30 ;
+	private int NOTECONTENTPC = 70 ;
+	private int NOTESLISTHEIGHT = (APPWIDTH - NOTENAMEHEIGHT) * NOTESLISTPC / 100 ;	// cannot use real numbers here; but this is more readable imo.
+	private int NOTECONTENTHEIGHT = (APPHEIGHT - NOTENAMEHEIGHT) * NOTECONTENTPC / 100;
 
 	public HashMap<String,Component> createUI(Models models){
 		HashMap<String,Component> controls = new HashMap<String,Component>();
@@ -59,7 +66,7 @@ abstract class JNVBase{
 		foundNotes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane foundNotesScroller = new JScrollPane(foundNotes);
-		foundNotesScroller.setPreferredSize(new Dimension(500,150));
+		foundNotesScroller.setPreferredSize(new Dimension(APPWIDTH,NOTESLISTHEIGHT));
 		controls.put("foundNotes", foundNotes);
 
 		JTextArea noteContent = new JTextArea();
@@ -67,7 +74,7 @@ abstract class JNVBase{
 		noteContent.setTabSize(4);
 		noteContent.setWrapStyleWord(true);
 		JScrollPane noteContentScroller = new JScrollPane(noteContent);
-		noteContentScroller.setPreferredSize(new Dimension(500,400));
+		noteContentScroller.setPreferredSize(new Dimension(APPWIDTH,NOTECONTENTHEIGHT));
 		controls.put("noteContent", noteContent);
 
 		Box vbox = Box.createVerticalBox();
@@ -77,7 +84,7 @@ abstract class JNVBase{
 
 		JFrame ui = new JFrame("jNV");
 		ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ui.setPreferredSize(new Dimension(520,600));
+		ui.setPreferredSize(new Dimension(APPWIDTH + BUFFER,APPHEIGHT));
 
 		ui.add(vbox);
 
