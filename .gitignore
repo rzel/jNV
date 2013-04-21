@@ -1,3 +1,4 @@
 *.class
-groovy/bin/groovy*.jar
+*.jar
+*.ser
 *.hide

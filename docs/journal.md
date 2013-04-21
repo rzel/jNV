@@ -73,4 +73,5 @@ Sun Apr 21 09:13:59 2013 : Purging out the jar, ser and json files. Reasons:
 1. Binaries dont belong in repos in general. I'd originally kept them in for ease of distribution. jNV is an individual itch being scratched; the only person I expect to "download and play" is me from my other machine.
 2. Even the purpose of sharing with myself didnt quite work: my other machine's jdk version was different. So source version it is.
 
-In prep for this, added readmes to the /bin and /classes directories. Now trying instructions from [Github on purging files](https://help.github.com/articles/remove-sensitive-data).
+In prep for this, added readmes to the /bin and /classes directories. Now trying instructions from [Github on purging files](https://help.github.com/articles/remove-sensitive-data). For reason this didnt change anything when I tried to delete the notes.ser file. I'm going to include the files in the ignore file for now.
+
