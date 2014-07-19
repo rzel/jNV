@@ -67,3 +67,11 @@ Sat Apr 20 08:13:11 2013 : Spent a lot of time meandering for a solution to keep
 .. finally the solution turned out to be to set the maximum size to intmax while constraining the height to what i'd wanted. apparently this is not a Swing best practice. But after going through all the layout managers (especially SpringLayout) I decided that solving this the best way in Swing is an exercise for a later date. Moving on after setting max size on the textbox, therefore :)
 
 Sat Apr 20 08:32:34 2013 : I'm starting a new tradition of adding all the browser tabs that were open at the time of coding. This is a poor substitute of saving the whole session itself, but imo it gives an idea of the context surrounding development.
+
+Sun Apr 21 09:13:59 2013 : Purging out the jar, ser and json files. Reasons:
+
+1. Binaries dont belong in repos in general. I'd originally kept them in for ease of distribution. jNV is an individual itch being scratched; the only person I expect to "download and play" is me from my other machine.
+2. Even the purpose of sharing with myself didnt quite work: my other machine's jdk version was different. So source version it is.
+
+In prep for this, added readmes to the /bin and /classes directories. Now trying instructions from [Github on purging files](https://help.github.com/articles/remove-sensitive-data). For reason this didnt change anything when I tried to delete the notes.ser file. I'm going to include the files in the ignore file for now.
+
